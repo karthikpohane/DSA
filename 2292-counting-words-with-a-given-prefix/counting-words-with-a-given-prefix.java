@@ -23,6 +23,8 @@
 //     }
 // }
 
+
+//With Inbuild Function - words[i].startsWith(pref)
 class Solution {
     public int prefixCount(String[] words, String pref) {
         int c=0;
