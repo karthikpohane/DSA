@@ -3,30 +3,23 @@ class Solution {
         int n = s.length();
         if(n%2!=0) return false;
 
-        Stack<Integer> open = new Stack<>();
-        Stack<Integer> openClose = new Stack<>();
+        int open = 0;
+        int close = 0;
 
-        
+        //Right Traversel
         for(int i=0; i<n; i++)
         {
-            //Step: 1
-            if(locked.charAt(i)=='0')
-                openClose.push(i);
-            //Step: 2
-            else if(s.charAt(i)=='(')
-                open.push(i);
-            else if(s.charAt(i)==')'){
-                if(!open.empty()) open.pop();
-                else if(!openClose.empty()) openClose.pop();
-                else return false;
-            }
+            if(s.charAt(i) =='(' || locked.charAt(i) == '0') open++;
+            else open --;
+            if(open<0) return false;
         }
-        //Step: 3
-        while(!open.empty() && !openClose.empty() && open.peek() < openClose.peek())
+        //left Traversel
+        for(int i=n-1; i>=0; i--)
         {
-            open.pop();
-            openClose.pop();
+            if(s.charAt(i) ==')' || locked.charAt(i) == '0') close++;
+            else close --;
+            if(close<0) return false;
         }
-       return open.empty();
+        return true;
     }
 }
