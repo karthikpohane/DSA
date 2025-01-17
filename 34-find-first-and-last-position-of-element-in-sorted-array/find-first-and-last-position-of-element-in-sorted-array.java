@@ -1,19 +1,42 @@
 class Solution {
     public int[] searchRange(int[] nums, int target) {
-        int[] result = {-1, -1}; // Default result for no match
+        int[] result = {-1, -1};
 
-        // Handle edge case where the array has only one element
-        if (nums.length == 1 && nums[0] == target) return new int[]{0, 0};
+        // Find the first occurrence of the target
+        result[0] = findBound(nums, target, true);
 
-        for (int i = 0; i < nums.length; i++) {
-            if (nums[i] == target) {
-                if (result[0] == -1) {
-                    result[0] = i;
+        // If the first occurrence is not found, return [-1, -1]
+        if (result[0] == -1) {
+            return result;
+        }
+
+        // Find the last occurrence of the target
+        result[1] = findBound(nums, target, false);
+
+        return result;
+    }
+
+    private int findBound(int[] nums, int target, boolean isFirst) {
+        int left = 0, right = nums.length - 1;
+        int bound = -1;
+
+        while (left <= right) {
+            int mid = left + (right - left) / 2;
+
+            if (nums[mid] == target) {
+                bound = mid; // Record the position
+                if (isFirst) {
+                    right = mid - 1; // Narrow down the search for the first occurrence
+                } else {
+                    left = mid + 1; // Narrow down the search for the last occurrence
                 }
-                result[1] = i;
+            } else if (nums[mid] < target) {
+                left = mid + 1;
+            } else {
+                right = mid - 1;
             }
         }
 
-        return result;
+        return bound;
     }
 }
