@@ -24,11 +24,11 @@ class Solution {
             int mid = left + (right - left) / 2;
 
             if (nums[mid] == target) {
-                bound = mid; // Record the position
+                bound = mid; 
                 if (isFirst) {
-                    right = mid - 1; // Narrow down the search for the first occurrence
+                    right = mid - 1; 
                 } else {
-                    left = mid + 1; // Narrow down the search for the last occurrence
+                    left = mid + 1; 
                 }
             } else if (nums[mid] < target) {
                 left = mid + 1;
