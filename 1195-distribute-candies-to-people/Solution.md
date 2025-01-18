@@ -1,15 +1,4 @@
-# README - Distribute Candies Solution
-
-## Problem Description
-
-In this problem, you are tasked with distributing a given number of candies (`candies`) to a group of people (`num_people`). You need to distribute the candies in such a way that:
-
-1. The first person receives 1 candy, the second person receives 2 candies, the third person receives 3 candies, and so on.
-2. If you run out of candies before reaching the last person, you distribute the remaining candies as much as possible.
-
-Once all candies are distributed, you should return the array `nums`, where `nums[i]` represents the number of candies received by the `i`-th person.
-
-## Code Solution
+# Code Solution
 
 ```java
 class Solution {
