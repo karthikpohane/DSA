@@ -10,38 +10,42 @@
  */
 class Solution {
     public boolean isPalindrome(ListNode head) {
-        if(head == null || head.next == null)
-            return true;
-        
-        // Stack<Integer> check = new Stack<>();
-        // ListNode temp = head;
-        // while (temp != null) {
-        //     check.push(temp.val);
-        //     temp = temp.next;
-        // }
-        // temp = head;
-        // while(temp!=null)
-        // {
-        // if(!check.isEmpty() && check.peek() == temp.val)
-        //     check.pop();
-        // else return false;
-        // temp = temp.next;
-        // }
-        // return check.isEmpty();
-        int [] arr = new int[100000];
-        int len = 0;
-        ListNode temp = head;
-        while(temp!=null)
+        if(head == null || head.next==null) return true;
+        ListNode slow = head;
+        ListNode fast = head;
+        while(fast!=null && fast.next!=null)
         {
-            arr[len++] = temp.val;
-            temp = temp.next;
+            slow = slow.next;
+            fast = fast.next.next;
         }
-        int mid = len/2;
-        for(int i=0; i<mid; i++)
+        ListNode newHead = reverseList(slow);
+        ListNode first = head;
+        ListNode second = newHead;
+        while(second != null)
         {
-            if(arr[i]!=arr[--len])
+            if(first.val != second.val)
+            {
+                reverseList(newHead);
                 return false;
+            }
+            first = first.next;
+            second = second.next;
         }
+        reverseList(newHead);
         return true;
+        
+    }
+
+    private ListNode reverseList(ListNode head){
+        if(head == null || head.next==null) return head;
+        ListNode prev = null;
+        while(head!=null)
+        {
+            ListNode nextNode = head.next;
+            head.next = prev;
+            prev = head;
+            head = nextNode;
+        }
+        return prev;
     }
 }
