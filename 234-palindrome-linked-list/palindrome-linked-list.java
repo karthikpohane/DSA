@@ -13,20 +13,35 @@ class Solution {
         if(head == null || head.next == null)
             return true;
         
-        Stack<Integer> check = new Stack<>();
+        // Stack<Integer> check = new Stack<>();
+        // ListNode temp = head;
+        // while (temp != null) {
+        //     check.push(temp.val);
+        //     temp = temp.next;
+        // }
+        // temp = head;
+        // while(temp!=null)
+        // {
+        // if(!check.isEmpty() && check.peek() == temp.val)
+        //     check.pop();
+        // else return false;
+        // temp = temp.next;
+        // }
+        // return check.isEmpty();
+        int [] arr = new int[100000];
+        int len = 0;
         ListNode temp = head;
-        while (temp != null) {
-            check.push(temp.val);
-            temp = temp.next;
-        }
-        temp = head;
         while(temp!=null)
         {
-        if(!check.isEmpty() && check.peek() == temp.val)
-            check.pop();
-        else return false;
-        temp = temp.next;
+            arr[len++] = temp.val;
+            temp = temp.next;
         }
-        return check.isEmpty();
+        int mid = len/2;
+        for(int i=0; i<mid; i++)
+        {
+            if(arr[i]!=arr[--len])
+                return false;
+        }
+        return true;
     }
 }
