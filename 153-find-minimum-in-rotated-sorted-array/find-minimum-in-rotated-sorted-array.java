@@ -3,7 +3,7 @@ class Solution {
         int n = nums.length;
         int low = 0;
         int high  = n-1;
-        int min = Integer.MAX_VALUE;
+        int min = Integer.MAX_VALUE; //Use MAX value because using min will always have the same value.
         while(low<=high){
             int mid = (low+high)/2;
             //Check for the sorted array and make the low as min
