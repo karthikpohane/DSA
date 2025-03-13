@@ -1,17 +1,17 @@
 class Solution {
     public int maxProduct(int[] nums) {
-        int maxProd = nums[0];
-        int prefix = 1;
+        int maxPro = nums[0];
         int sufix = 1;
+        int prefix = 1;
         int n = nums.length;
-        for(int i=0; i<n; i++){
-            if(prefix == 0) prefix = 1;
-            if(sufix == 0) sufix =1;
-            prefix *= nums[i];
-            sufix *= nums[n-i-1];
+        for(int i=0;i<n;i++){
+            if(sufix==0) sufix = 1;
+            if(prefix==0) prefix = 1;
 
-            maxProd = Math.max(maxProd, Math.max(sufix, prefix));
+            sufix *= nums[i];
+            prefix *= nums[n-i-1];
+            maxPro = Math.max(maxPro, Math.max(sufix, prefix));
         }
-        return maxProd;
+        return maxPro;
     }
 }
