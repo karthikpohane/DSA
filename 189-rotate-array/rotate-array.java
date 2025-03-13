@@ -10,9 +10,8 @@ class Solution {
     }
 
     public void reverse(int[] nums, int start, int end){
-        int temp;
         while(start<end){
-            temp = nums[start];
+            int temp = nums[start];
             nums[start] = nums[end];
             nums[end] = temp;
             start++;
