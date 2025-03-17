@@ -1,9 +1,22 @@
 class LRUCache {
+    //1. Create a class to initialize Doubbly LinkedList i.e ListNode
+    class ListNode {
+        ListNode prev, next;
+        int key, value;
+        ListNode(int _key, int _value) {
+            key = _key;
+            value = _value;
+        }
+    }
+
+    //2. Creation of head and tail of the linkedlist and a map to store the 
+    // key and the node i.e reference of the node.
     ListNode head = new ListNode(0, 0);
     ListNode tail = new ListNode(0, 0);
     HashMap<Integer, ListNode> map = new HashMap<>();
     int capacity;
 
+    //3. Initialize the capacity, head and tail of the DLL
     public LRUCache(int capacity) {
         this.capacity = capacity;
         head.next = tail;
@@ -45,14 +58,5 @@ class LRUCache {
         node.prev = head;
         node.next = headNext;
         headNext.prev = node;
-    }
-
-    class ListNode {
-        ListNode prev, next;
-        int key, value;
-        ListNode(int _key, int _value) {
-            key = _key;
-            value = _value;
-        }
     }
 }
