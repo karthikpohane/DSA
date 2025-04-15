@@ -1,6 +1,6 @@
 class Solution {
     public int minEatingSpeed(int[] piles, int h) { 
-        int low = 0;
+        int low = 1;
         int high = maxValue(piles);
         int k = 0;
         int totalHours = 0;
