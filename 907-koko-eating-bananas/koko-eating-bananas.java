@@ -1,34 +1,48 @@
 class Solution {
-    public int minEatingSpeed(int[] piles, int h) { 
-        int low = 1;
-        int high = maxValue(piles);
-        int k = 0;
-        int totalHours = 0;
-        while(low<=high){
-            int mid = (low+high)/2;
-            totalHours = findHours(piles, mid);
-            if(totalHours <= h){
-                k = mid;
-                high = mid-1;
-            } else low = mid+1;
+    public int minEatingSpeed(int[] piles, int h) {
+        /*
+         * Approach:
+         * - Use binary search to find the minimum possible eating speed `k`.
+         * - The range for k is [1, max(piles)].
+         * - For each mid = (low + high) / 2, compute total hours required.
+         * - If total hours <= h, update result and search in lower half.
+         * - Else, search in upper half.
+         * 
+         * Time Complexity: O(n * log m), where n = piles.length, m = max(piles)
+         * Space Complexity: O(1)
+         */
+
+        int low = 1, high = getMax(piles), result = high;
+
+        while (low <= high) {
+            int mid = low + (high - low) / 2;
+            if (canEatAll(piles, h, mid)) {
+                result = mid;
+                high = mid - 1;
+            } else {
+                low = mid + 1;
+            }
         }
-        return k;
+
+        return result;
     }
 
-    //Funtion to find the number of hours required if k = mid is assumed.
-    private static int findHours(int nums[], int k){
+    // Check if all bananas can be eaten at speed k within h hours
+    private boolean canEatAll(int[] piles, int h, int k) {
         int hours = 0;
-        for(int i=0; i<nums.length; i++){
-            hours += Math.ceil((double)nums[i] / (double)k);
+        for (int pile : piles) {
+            // Avoids casting with Math.ceil
+            hours += (pile + k - 1) / k;
+            if (hours > h) return false; // Early exit
         }
-        return hours;
+        return true;
     }
 
-    //Function to find the max of the array elements
-    private static int maxValue(int nums[]){
-        int max = Integer.MIN_VALUE;
-        for(int i=0; i<nums.length; i++){
-            max = Math.max(max, nums[i]);
+    // Get maximum value in array
+    private int getMax(int[] piles) {
+        int max = piles[0];
+        for (int pile : piles) {
+            if (pile > max) max = pile;
         }
         return max;
     }
