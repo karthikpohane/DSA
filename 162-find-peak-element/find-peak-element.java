@@ -1,18 +1,16 @@
 class Solution {
     public int findPeakElement(int[] nums) {
         //Using Binary search
-        //Step 1 - finding the mid and checking if that is the peak ele.
         int n = nums.length;
-        int low = 0;
-        int high = n-1;
-        if(n==1) return 0;
-        else if(nums[low]>nums[low+1]) return low;
-        else if(nums[high]>nums[high-1]) return high;
-        else{
-            low++;
-            high--;
-        }
+        //Step 1 - find if the 1st and last elements are Peak ele or not
+        if(n==1) return 0; // if only ele that is peak ele
+        if(nums[0]>nums[1]) return 0;
+        if(nums[n-1]>nums[n-2]) return n-1;
 
+        //Step 2 - As we have checked for 1st and last ele
+        //Start from 1 till n-2
+        int low = 1;
+        int high = n-2;
         while(low<=high){
             int mid = (low+high)/2;
             if(nums[mid-1] < nums[mid] && nums[mid+1] < nums[mid])
