@@ -1,20 +1,21 @@
 class Solution {
     public String countAndSay(int n) {
-        if (n == 1) return "1";
+        if(n==1) return "1";
 
-        String say = countAndSay(n - 1);
-        // Processing 
+        String prev = countAndSay(n-1);
         StringBuffer result = new StringBuffer();
-        for (int i = 0; i < say.length(); i++) {
-            char ch = say.charAt(i);
-            int count = 1;
-            while (i < say.length() - 1 && say.charAt(i) == say.charAt(i + 1)) {
+        int count = 1;
+        for(int i=1; i<prev.length(); i++){
+            if(prev.charAt(i) == prev.charAt(i-1)){
                 count++;
-                i++;
+            } else {
+                result.append(count).append(prev.charAt(i-1));
+                count = 1;
             }
-            result.append(Integer.toString(count)).append(ch);
         }
-
+        result.append(count).append(prev.charAt(prev.length()-1));
         return result.toString();
     }
 }
+
+
