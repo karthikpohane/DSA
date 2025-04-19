@@ -6,7 +6,7 @@ class Solution {
             int minReq = lower - nums[i];
             int maxReq = upper - nums[i];
             int low = lowerBound(nums, i + 1, nums.length, minReq);
-            int high = lowerBound(nums, i + 1, nums.length, maxReq+1);
+            int high = upperBound(nums, i + 1, nums.length, maxReq);
             ans += (high - low);
         }
         return ans;
@@ -22,13 +22,13 @@ class Solution {
         return lo;
     }
 
-    // private int upperBound(int[] nums, int start, int end, int target) {
-    //     int lo = start, hi = end;
-    //     while (lo < hi) {
-    //         int mid = lo + (hi - lo) / 2;
-    //         if (nums[mid] <= target) lo = mid + 1;
-    //         else hi = mid;
-    //     }
-    //     return lo;
-    // }
+    private int upperBound(int[] nums, int start, int end, int target) {
+        int lo = start, hi = end;
+        while (lo < hi) {
+            int mid = lo + (hi - lo) / 2;
+            if (nums[mid] <= target) lo = mid + 1;
+            else hi = mid;
+        }
+        return lo;
+    }
 }
