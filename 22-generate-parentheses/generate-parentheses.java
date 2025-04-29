@@ -1,22 +1,31 @@
 class Solution {
     public List<String> generateParenthesis(int n) {
-        List<String> result = new ArrayList<>();
-        backtrack(result, "", 0, 0, n);
-        return result;
-    }
-    
-    private void backtrack(List<String> result, String current, int open, int close, int max) {
-        if (current.length() == max * 2) {
-            result.add(current);
-            return;
+        List<String>[] dp = new List[n+1];
+
+        //Pre defined and will always be same.
+        dp[0] = Arrays.asList("");
+        dp[1] = Arrays.asList("()");
+
+        for(int i=2; i<= n; i++){
+            dp[i] = new ArrayList<>();
+            int inner = i-1;
+            int outer = 0;
+            while(inner >= 0 && outer <= i-1){
+               for(String in: dp[inner]){
+                for(String out: dp[outer]){
+                    StringBuilder sb = new StringBuilder();
+                    sb.append("(");
+                    sb.append(in);
+                    sb.append(")");
+                    sb.append(out);
+                    dp[i].add(sb.toString());
+
+                }
+               }
+               inner--;
+               outer++; 
+            }
         }
-        
-        if (open < max) {
-            backtrack(result, current + "(", open + 1, close, max);
-        }
-        
-        if (close < open) {
-            backtrack(result, current + ")", open, close + 1, max);
-        }
+    return dp[n];
     }
 }
