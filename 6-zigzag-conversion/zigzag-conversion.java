@@ -1,35 +1,33 @@
 class Solution {
     public String convert(String s, int numRows) {
-        if (numRows == 1 || s.length() <= numRows) {
+        if(numRows == 1) {
             return s;
         }
         
-        StringBuilder[] rows = new StringBuilder[numRows];
-        
-        for (int i = 0; i < numRows; i++) {
-            rows[i] = new StringBuilder();
-        }
-        
-        int currentRow = 0;
-        boolean goingDown = false;
-        
-        for (char c : s.toCharArray()) {
-            rows[currentRow].append(c);
-            
-            // Change direction when reaching the top or bottom
-            if (currentRow == 0 || currentRow == numRows - 1) {
-                goingDown = !goingDown;
+        StringBuilder sb = new StringBuilder();
+        for(int i= 0; i<numRows; i++){
+            int idx = i;
+            int deltaSouth = 2 * (numRows - 1 - i); //Finding the length of the elements from the bottom
+            int deltaNorth = 2 * i; //Finding the length from the top
+            boolean goingSouth = true;
+            while(idx < s.length()){
+                sb.append(s.charAt(idx));
+                if(i == 0){
+                    idx += deltaSouth;
+                } else if(i == numRows-1){
+                    idx += deltaNorth;
+                } else {
+                    if(goingSouth) {
+                        idx += deltaSouth;
+                    } else {
+                        idx += deltaNorth;
+                    }
+                goingSouth = !goingSouth;
+                }
             }
-            
-            currentRow += goingDown ? 1 : -1;
+
         }
         
-        StringBuilder result = new StringBuilder();
-        
-        for (StringBuilder row : rows) {
-            result.append(row);
-        }
-        
-        return result.toString();
+        return sb.toString();
     }
 }
