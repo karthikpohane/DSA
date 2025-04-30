@@ -2,18 +2,15 @@ class Solution {
     public boolean increasingTriplet(int[] nums) {
         int first = Integer.MAX_VALUE;
         int second = Integer.MAX_VALUE;
-
-        for (int n : nums) {
-            if (n <= first) {
-                first = n;
-            } else if (n <= second) {
-                second = n;
+        for(int val: nums){
+            if(val <= first){
+                first = val;
+            } else if(val <= second){
+                second = val;
             } else {
-                // found third number greater than both
                 return true;
             }
         }
-
-        return false;
+        return false; 
     }
 }
