@@ -1,16 +1,16 @@
 class Solution {
     public int majorityElement(int[] nums) {
-        Arrays.sort(nums);
-        int ans = nums[0];
+        //Moore's Voting algorithm.
         int freq = 0;
-        for(int i=1; i<nums.length; i++){
-            if(nums[i] == nums[i-1]){
+        int ans = 0;
+        for(int i=0; i<nums.length; i++){
+            if(freq == 0)
+                ans = nums[i];
+            if(ans == nums[i]){
                 freq++;
             } else {
-                freq = 1;
-                ans = nums[i];
+                freq--;
             }
-            if(freq >= nums.length/2) return ans;
         }
         return ans;
     }
