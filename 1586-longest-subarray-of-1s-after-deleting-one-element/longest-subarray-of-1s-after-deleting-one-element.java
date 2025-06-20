@@ -1,5 +1,6 @@
 class Solution {
     public int longestSubarray(int[] nums) {
+        // Leetcode 1004 | Maximum consecutive ones III with k=1
         // Sliding window using Acquire and Release approach
         int i = 0;
         int j = -1;
